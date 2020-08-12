@@ -77,7 +77,7 @@ else ifeq ($(platform), linux-portable)
 	LIBM :=
 # OS X
 else ifeq ($(platform), osx)
-	TARGET := lib$(TARGET_NAME)_core.dylib
+	TARGET := $(TARGET_NAME)_core.bundle
 	fpic := -fPIC
 	SHARED := -dynamiclib
 	ifeq ($(arch),ppc)
