@@ -123,19 +123,20 @@ void power()
 
 void core_run_frame(int inputs, int32_t** pSound, int32_t* sound_size, TileData ** pTiles, int32_t* tileCount, int8_t** palette)
 {
-   unsigned i;
-   uint8_t *gfx;
-   int32_t ssize = 0;
-   
+	uint8_t *gfx;
+	frame++;  
+	input = inputs & 0xFFFF;
+	tile_count = 0;	
+	
 	int button = (inputs >> 16) & 0xFF;
 	if (button == 1)
-		core_reset();
+		ResetNES();
 	else if (button == 2)
-		power();
-   frame++;  
-   input = inputs & 0xFFFF;
-	tile_count = 0;
-   FCEUI_Emulate(&gfx, pSound, sound_size, 0);
+		PowerNES();
+	
+
+	FCEUI_Emulate(&gfx, pSound, sound_size, 0);		
+
 	*tileCount = tile_count;
 	*pTiles = tile_buffer;
 	*palette = (int8_t*)PALRAM;
